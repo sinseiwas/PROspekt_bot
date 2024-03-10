@@ -47,6 +47,17 @@ def get_keyboard():
     return keyboard
 
 
+@dp.message(F.text.lower() == "content plan")
+async def cmd_content_plan(message: types.Message):
+    for i in range(len(text.data['name'])):
+        if str(text.data['name'][i]) != 'nan':
+            await message.answer(f"Дата поста: {str(text.data['date'][i])}\n"
+            f"Название поста: {str(text.data['name'][i])}\n"
+            f"Автор текста: {str(text.data['text'][i])}\n"
+            f"Автор дизайна: {str(text.data['picture'][i])}"
+    )
+
+
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
     builder = ReplyKeyboardBuilder()
@@ -56,6 +67,7 @@ async def cmd_start(message: types.Message):
     builder.add(types.KeyboardButton(text="hello"))
     builder.add(types.KeyboardButton(text="info"))
     builder.add(types.KeyboardButton(text="am i alone"))
+    builder.add(types.KeyboardButton(text="content plan"))
     builder.adjust(2)
     await message.answer(
         f"Привет! Театр ПРОспект приветствует тебя\n",
@@ -70,19 +82,6 @@ async def cmd_start(message: types.Message):
         reply_markup=builder.as_markup(),
     )
 
-
-
-@dp.message(Command("random"))
-async def cmd_random(message: types.Message):
-    builder = InlineKeyboardBuilder()
-    builder.add(types.InlineKeyboardButton(
-        text="Нажми меня",
-        callback_data="random_value")
-    )
-    await message.answer(
-        "Нажмите на кнопку, чтобы бот отправил число от 1 до 10",
-        reply_markup=builder.as_markup()
-    )
 
 
 @dp.message(F.text.lower() == "bot founder")
