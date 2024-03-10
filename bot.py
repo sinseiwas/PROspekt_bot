@@ -4,10 +4,11 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 from datetime import datetime
 import text
+from config_reader import config
 
 
 logging.basicConfig(level=logging.INFO)
-bot = Bot(token="6974256244:AAFwzF8cqPoSN_jiHPdu1Mw9PDChUCyRQv0")
+bot = Bot(token=config.bot_token.get_secret_value())
 dp = Dispatcher()
 dp["started_at"] = datetime.now().strftime("%Y-%m-%d %H:%M")
 mylist = [1,2,3]
