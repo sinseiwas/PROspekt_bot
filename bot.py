@@ -118,17 +118,26 @@ async def send_organizers(callback: types.callback_query):
 
 @dp.callback_query(F.data == "dezigners")
 async def send_dezigners(callback: types.callback_query):
-    await callback.message.answer("Алина Шушкова")
+    await callback.message.answer(
+        f"{hide_link('https://www.meme-arsenal.com/memes/f9043fd1f846222cc64e8a929ecaeed5.jpg')}"
+        f"Алина Шушкова"
+    )
 
 
 @dp.callback_query(F.data == "smm")
 async def send_smm(callback: types.callback_query):
-    await callback.message.answer("Дарья Гостева")
+    await callback.message.answer(
+        f"{hide_link('https://sun9-7.userapi.com/impg/7aKlRz9lGOzjhRuPSEo2ppcPVFnExSoQMwPQrw/o7wVRmuTIK4.jpg?size=2560x1920&quality=95&sign=9f96785fe91b3b60bb0b67d01096a657&type=album')}"
+        f"Дарья Гостева"
+    )
 
 
 @dp.callback_query(F.data == "actors")
 async def send_actors(callback: types.callback_query):
-    await callback.message.answer("Ася Панина")
+    await callback.message.answer(
+        f"{hide_link('https://www.meme-arsenal.com/memes/e4cbb27094a83dc2acd2e9fb68194888.jpg')}"
+        f"Ася Панина"
+    )
 
 
 @dp.callback_query(F.data == "comand_founder")
