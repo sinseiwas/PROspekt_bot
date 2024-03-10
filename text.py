@@ -1,0 +1,1 @@
+cmd_list = "Список команд:\n1)/add_to_list\n2)/show_list\n3)/info\n4)/answer\n5)/reply"

@@ -2,16 +2,35 @@ import asyncio
 import logging
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
+from datetime import datetime
+import text
 
 
 logging.basicConfig(level=logging.INFO)
 bot = Bot(token="6974256244:AAFwzF8cqPoSN_jiHPdu1Mw9PDChUCyRQv0")
 dp = Dispatcher()
+dp["started_at"] = datetime.now().strftime("%Y-%m-%d %H:%M")
+mylist = [1,2,3]
 
 
+@dp.message(Command("add_to_list"))
+async def cmd_add_to_list(message: types.Message):
+    mylist.append(7)
+    await message.answer("Добавлено число 7")
+
+@dp.message(Command("show_list"))
+async def cmd_show_list(message: types.Message):
+    await message.answer(f"Ваш список: {mylist}")
+    
+
+@dp.message(Command("info"))
+async def cmd_info(message: types.Message, started_at: str):
+    await message.answer(f"Бот запущен: {started_at}")
+
+    
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.answer("Hello!")
+    await message.answer(text.cmd_list)
 
 
 @dp.message(Command("test1"))
