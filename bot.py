@@ -1,10 +1,11 @@
 import asyncio
 from aiogram import Bot, Dispatcher
 from handlers import start, answers
+from aiogram.utils.markdown import hide_link
 
 
 async def main():
-    bot = Bot(token="6974256244:AAFwzF8cqPoSN_jiHPdu1Mw9PDChUCyRQv0")
+    bot = Bot(token="6974256244:AAFwzF8cqPoSN_jiHPdu1Mw9PDChUCyRQv0", parse_mode="HTML")
     dp = Dispatcher()
 
     dp.include_routers(start.router, answers.router)
