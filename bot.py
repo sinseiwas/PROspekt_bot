@@ -3,7 +3,6 @@ from aiogram import Bot, Dispatcher
 from handlers import start, answers
 
 
-# Запуск бота
 async def main():
     bot = Bot(token="6974256244:AAFwzF8cqPoSN_jiHPdu1Mw9PDChUCyRQv0")
     dp = Dispatcher()

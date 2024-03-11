@@ -3,8 +3,10 @@ from aiogram.types import Message
 from aiogram.enums import ParseMode
 from aiogram.utils.markdown import hide_link
 
+
+from random import choice
 import exel
-from keyboards.keyboards import get_keyboard
+from keyboards.keyboards import get_org_keyboard, get_cp_kb, get_name_cp_kb
 
 
 
@@ -30,15 +32,7 @@ async def cmd_in_development(message: types.Message):
 @router.message(F.text.lower() == "bosses")
 async def cmd_bosses(message: types.Message):
     await message.answer(
-        "О ком вы бы хотели узнать больше?", reply_markup=get_keyboard()
-    )
-
-
-@router.message(F.text.lower() == "hello")
-async def cmd_hello(message: Message):
-    await message.answer(
-        f"Hello, <u>{message.from_user.full_name}</u>",
-        parse_mode=ParseMode.HTML
+        "О ком вы бы хотели узнать больше?", reply_markup=get_org_keyboard()
     )
 
 
@@ -52,13 +46,27 @@ async def cmd_am_i_alone(message: Message):
 
 @router.message(F.text.lower() == "content plan")
 async def cmd_content_plan(message: types.Message):
-    for i in range(len(exel.data['name'])):
-        if str(exel.data['name'][i]) != 'nan':
-            await message.answer(f"Дата поста: {str(exel.data['date'][i])}\n"
-            f"Название поста: {str(exel.data['name'][i])}\n"
-            f"Автор текста: {str(exel.data['text'][i])}\n"
-            f"Автор дизайна: {str(exel.data['picture'][i])}"
+    await message.answer(
+        "Даты на март",
+        reply_markup=get_cp_kb()
     )
+    await message.answer(
+        "Тексты на март",
+        reply_markup=get_name_cp_kb
+    )
+
+for i in range(1, 32):
+    if F.data == str(i):
+        @router.callback_query(F.data == str(i))
+        async def date_of_post(callback: types.CallbackQuery):
+            i = int(callback.data)
+            await callback.message.answer(
+                f"Дата поста: {str(exel.data['date'][i - 1])}\n"
+                f"Название поста: {str(exel.data['name'][i - 1])}\n"
+                f"Автор текста: {str(exel.data['text'][i - 1])}\n"
+                f"Автор дизайна: {str(exel.data['picture'][i - 1])}",
+            )
+
 
 
 @router.callback_query(F.data == "director")

@@ -3,7 +3,10 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder
 from aiogram import types
 
 
-def get_keyboard():
+import exel
+
+
+def get_org_keyboard():
     buttons = [
         [
             types.InlineKeyboardButton(text="Режисёры", callback_data="director"),
@@ -18,15 +21,40 @@ def get_keyboard():
             types.InlineKeyboardButton(text="Куратор командообразования", callback_data="comand_founder")
         ]
     ]
+
+
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=buttons)
     return keyboard
+
+
+def get_cp_kb():
+    buttons = []
+    for i in range(1, 32, 4):
+        row = [
+            types.InlineKeyboardButton(text=f"{i}", callback_data=f"{i}"),
+            types.InlineKeyboardButton(text=f"{i + 1}", callback_data=f"{i + 1}"),
+            types.InlineKeyboardButton(text=f"{i + 2}", callback_data=f"{i + 2}")
+        ]
+        if i + 3 != 32:
+            row.append(types.InlineKeyboardButton(text=f"{i + 3}", callback_data=f"{i + 3}"))
+        buttons.append(row)
+    keyboard = types.InlineKeyboardMarkup(inline_keyboard=buttons)
+    return keyboard
+
+
+def get_name_cp_kb():
+    buttons = []
+    for i in text.names:
+        types.InlineKeyboardButton(text=f"{i}", callback_data=f"{i}")
+    keyboard = types.InlineKeyboardMarkup(inline_keyboard=buttons)
+    return keyboard
+
 
 def get_start_kb():
     builder = ReplyKeyboardBuilder()
     builder.add(types.KeyboardButton(text="bosses"))
     builder.add(types.KeyboardButton(text="bot founder"))
     builder.add(types.KeyboardButton(text="in development"))
-    builder.add(types.KeyboardButton(text="hello"))
     builder.add(types.KeyboardButton(text="am i alone"))
     builder.add(types.KeyboardButton(text="content plan"))
     builder.adjust(2)
