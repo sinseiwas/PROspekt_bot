@@ -1,7 +1,8 @@
 # Функциональные модели
 
-# Функциональные модели
+## Диаграмма вариантов использования
 
+```plantuml
 @startuml
 left to right direction
 actor User as U
@@ -20,7 +21,6 @@ rectangle "Театральное приложение" {
     U --> (F)
 }
 @enduml
-
 @startuml
 :User: --> (Start)
 :Start: --> (View Directors Info)
