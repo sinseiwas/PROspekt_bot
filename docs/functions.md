@@ -1,7 +1,7 @@
 # Функциональные модели
 
 ## Функциональные возможности
-https://github.com/sinseiwas/PROspekt_bot/blob/ce11f6b803b321f5fd1584f4193ab924c48bfc02/docs/diagrams/information.png
+![INFORMATION](https://github.com/sinseiwas/PROspekt_bot/blob/ce11f6b803b321f5fd1584f4193ab924c48bfc02/docs/diagrams/information.png)
 ### Постановки
  Пользователь нажимает на кнопку постановки - Программа отображает постановки на этот месяц
 ### Треннинги
