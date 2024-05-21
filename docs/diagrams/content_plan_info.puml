@@ -1,14 +1,14 @@
 @startuml
 actor User
 participant "Telegram Bot" as Bot
-participant "Handler" as TrainingsHandler
+participant "Handler" as SMMHandler
 
-User -> Bot: trainings
+User -> Bot: SMM
 activate Bot
-Bot -> TrainingsHandler: handle_trainings(message)
-activate TrainingsHandler
-TrainingsHandler -> Bot: send_message(user, current_month_trainings)
-deactivate TrainingsHandler
-Bot -> User: Display trainings information for the current month
+Bot -> SMMHandler: handle_smm(message)
+activate SMMHandler
+SMMHandler -> Bot: send_message(user, smm_posts_list)
+deactivate SMMHandler
+Bot -> User: Display list of SMM posts to be done
 deactivate Bot
 @enduml
