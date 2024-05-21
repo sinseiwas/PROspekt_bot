@@ -11,9 +11,10 @@
 
 Пользователь нажимает на кнопку треннинги - Программа отображает информацию о треннингах на текущий месяц
 ### КП
-![CONTENT-PLAN](https://github.com/sinseiwas/PROspekt_bot/blob/ea7a87debc1c6c9bccf997780c2faa74914ed614/docs/diagrams/content_plan_info.png
-)
+![CONTENT-PLAN](https://github.com/sinseiwas/PROspekt_bot/blob/ea7a87debc1c6c9bccf997780c2faa74914ed614/docs/diagrams/content_plan_info.png)
+
 Пользователь нажимает на кнопку СММ - Программа отображает список постов, которые нужно сделать
 ### ДОЛЖНОСТНЫЕ ЛИЦА
 ![DIRECTORS](https://github.com/sinseiwas/PROspekt_bot/blob/ea7a87debc1c6c9bccf997780c2faa74914ed614/docs/diagrams/directors_info.png)
+
 Пользователь нажимает на кнопку должностные лица - Программа отображает о нём информацию
