@@ -1,0 +1,13 @@
+@startuml
+start
+:User;
+:View Organizers Info;
+if (Is User Logged In?) then (yes)
+  :Retrieve Organizers Info;
+  :Display Organizers Info;
+else (no)
+  :Ask User to Log In;
+  stop
+endif
+stop
+@enduml

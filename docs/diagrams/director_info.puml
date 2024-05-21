@@ -1,0 +1,29 @@
+@startuml
+actor User
+participant "Telegram Bot" as Bot
+participant "Handler" as BossesHandler
+participant "Handler" as SpecificPersonHandler
+participant "Keyboards" as Keyboards
+
+User -> Bot: bosses
+activate Bot
+Bot -> BossesHandler: handle_bosses(message)
+activate BossesHandler
+BossesHandler -> Keyboards: get_org_keyboard()
+activate Keyboards
+Keyboards -> BossesHandler: return keyboard
+deactivate Keyboards
+BossesHandler -> Bot: send_message(user, message, keyboard)
+deactivate BossesHandler
+Bot -> User: Show keyboard with options
+deactivate Bot
+
+User -> Bot: select specific person
+activate Bot
+Bot -> SpecificPersonHandler: handle_specific_person(callback_query)
+activate SpecificPersonHandler
+SpecificPersonHandler -> Bot: send_message(user, person_info)
+deactivate SpecificPersonHandler
+Bot -> User: Display information about the selected person
+deactivate Bot
+@enduml
