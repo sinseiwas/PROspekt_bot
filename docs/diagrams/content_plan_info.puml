@@ -1,14 +1,7 @@
 @startuml
-actor User
-participant "Telegram Bot" as Bot
-participant "Handler" as SMMHandler
-
-User -> Bot: SMM
-activate Bot
-Bot -> SMMHandler: handle_smm(message)
-activate SMMHandler
-SMMHandler -> Bot: send_message(user, smm_posts_list)
-deactivate SMMHandler
-Bot -> User: Display list of SMM posts to be done
-deactivate Bot
+start
+:Нажать на кнопку "СММ";
+:Нажать на дату;
+:Отобразить список постов, которые нужно сделать;
+stop
 @enduml

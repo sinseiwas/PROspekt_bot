@@ -1,29 +1,8 @@
 @startuml
-actor User
-participant "Telegram Bot" as Bot
-participant "Handler" as ProductionsHandler
-participant "Handler" as MonthHandler
-participant "Keyboards" as Keyboards
-
-User -> Bot: productions
-activate Bot
-Bot -> ProductionsHandler: handle_productions(message)
-activate ProductionsHandler
-ProductionsHandler -> Keyboards: get_month_keyboard()
-activate Keyboards
-Keyboards -> ProductionsHandler: return keyboard
-deactivate Keyboards
-ProductionsHandler -> Bot: send_message(user, message, keyboard)
-deactivate ProductionsHandler
-Bot -> User: Show keyboard with month options
-deactivate Bot
-
-User -> Bot: select month
-activate Bot
-Bot -> MonthHandler: handle_month(callback_query)
-activate MonthHandler
-MonthHandler -> Bot: send_message(user, month_productions)
-deactivate MonthHandler
-Bot -> User: Display productions for the selected month
-deactivate Bot
+start
+:Нажать на кнопку "Постановки";
+:Отобразить список месяцев;
+:Выбрать месяц;
+:Отобразить постановки на выбранный месяц;
+stop
 @enduml
