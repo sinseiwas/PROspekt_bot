@@ -1,0 +1,38 @@
+@startuml
+package "Telegram Bot Application" {
+    [Bot] --> [Dispatcher]
+
+    [Dispatcher] --> [Router]
+
+    package "Handlers" {
+        [MessageHandler]
+        [CallbackQueryHandler]
+    }
+
+    [Router] --> [MessageHandler]
+    [Router] --> [CallbackQueryHandler]
+
+    package "Database" {
+        [DBConnector]
+        [UserRepository]
+        [ContentRepository]
+    }
+
+    package "External Services" {
+        [ExternalAPI]
+        [FileStorageService]
+    }
+
+    [MessageHandler] --> [DBConnector]
+    [MessageHandler] --> [UserRepository]
+    [MessageHandler] --> [ContentRepository]
+    [MessageHandler] --> [ExternalAPI]
+    [MessageHandler] --> [FileStorageService]
+
+    [CallbackQueryHandler] --> [DBConnector]
+    [CallbackQueryHandler] --> [UserRepository]
+    [CallbackQueryHandler] --> [ContentRepository]
+    [CallbackQueryHandler] --> [ExternalAPI]
+    [CallbackQueryHandler] --> [FileStorageService]
+}
+@enduml

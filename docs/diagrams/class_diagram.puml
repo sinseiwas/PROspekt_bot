@@ -1,0 +1,45 @@
+@startuml
+class Bot {
+    - token: str
+    - parse_mode: str
+    + start()
+    + stop()
+}
+
+class Dispatcher {
+    + include_routers(routers: list)
+    + start_polling(bot: Bot)
+}
+
+class Router {
+    + message(handler: Callable)
+    + callback_query(handler: Callable)
+}
+
+class MessageHandler {
+    + handle_message(message: Message)
+}
+
+class CallbackQueryHandler {
+    + handle_callback_query(callback_query: CallbackQuery)
+}
+
+class Excel {
+    + data: dict
+}
+
+class Keyboards {
+    + get_org_keyboard(): InlineKeyboardMarkup
+    + get_cp_kb(): InlineKeyboardMarkup
+    + get_name_cp_kb(): InlineKeyboardMarkup
+    + get_start_kb(): ReplyKeyboardMarkup
+}
+
+Bot --> Dispatcher
+Dispatcher --> Router
+Router --> MessageHandler
+Router --> CallbackQueryHandler
+MessageHandler --> Excel
+CallbackQueryHandler --> Excel
+Keyboards --> Router
+@enduml
