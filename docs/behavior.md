@@ -9,7 +9,7 @@
 - DisplayingPerformances: Состояние, в котором бот отображает данные о постановках.
 
 ## ТРЕННИНГИ
-![TRAININGS](https://github.com/sinseiwas/PROspekt_bot/blob/507173e5827142b6157ca4b6aea5956a9b77abde/docs/diagrams/treninngs_status.puml)
+![TRAININGS](https://github.com/sinseiwas/PROspekt_bot/blob/0141269bb9b647673971f64419919e7a47475b18/docs/diagrams/trennings_status.png)
 
 - Idle: Начальное состояние бота, когда он ожидает команду от пользователя.
 - FetchingTrainings: Состояние, в котором бот получает данные о тренингах.
