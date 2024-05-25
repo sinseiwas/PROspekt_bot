@@ -1,0 +1,12 @@
+@startuml
+[*] --> Idle
+
+Idle : Ожидание команды
+Idle --> SelectingMonth : Нажата кнопка "Постановки"
+SelectingMonth : Выбор месяца
+SelectingMonth --> FetchingPerformances : Месяц выбран
+FetchingPerformances : Получение постановок
+FetchingPerformances --> DisplayingPerformances : Постановки получены
+DisplayingPerformances : Отображение постановок
+DisplayingPerformances --> Idle : Ожидание следующей команды
+@enduml

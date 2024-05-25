@@ -1,0 +1,14 @@
+@startuml
+[*] --> Idle
+
+Idle : Ожидание команды
+Idle --> FetchingData : Нажата кнопка "Должностные лица"
+FetchingData : Получение данных
+FetchingData --> DisplayingOptions : Данные получены
+DisplayingOptions : Отображение вариантов
+DisplayingOptions --> FetchingInfo : Выбран конкретный вариант
+FetchingInfo : Получение информации
+FetchingInfo --> DisplayingInfo : Информация получена
+DisplayingInfo : Отображение информации
+DisplayingInfo --> Idle : Ожидание следующей команды
+@enduml

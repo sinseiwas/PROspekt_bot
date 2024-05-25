@@ -1,0 +1,10 @@
+@startuml
+[*] --> Idle
+
+Idle : Ожидание команды
+Idle --> FetchingTrainings : Нажата кнопка "Тренинги"
+FetchingTrainings : Получение информации о тренингах
+FetchingTrainings --> DisplayingTrainings : Информация получена
+DisplayingTrainings : Отображение информации о тренингах
+DisplayingTrainings --> Idle : Ожидание следующей команды
+@enduml
