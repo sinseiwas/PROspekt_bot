@@ -3,24 +3,32 @@ from aiogram.types import Message
 from aiogram.enums import ParseMode
 from aiogram.utils.markdown import hide_link
 
-
 from random import choice
-import exel
-from keyboards.keyboards import get_org_keyboard, get_cp_kb, get_name_cp_kb
-
+from keyboards.keyboards import get_org_keyboard, get_cp_kb, get_name_cp_kb, get_trenning_kb
+from database_prospekt import return_directors, return_content_plan, return_trennings_plan, db, cur
+import time
+import threading
 
 
 router = Router()
 dp = Dispatcher()
+dir = return_directors()
+content = return_content_plan()
+trennings = return_trennings_plan()
 
+
+@dp.message_handler(commands=['dz'])
+async def process_start_command(message: types.Message):
+    dz = CACHE['dz']
+    await message.reply(dz)
 
 @router.message(F.text.lower() == "bot founder")
 async def cmd_hidden_link(message: Message):
     await message.answer(
         f"{hide_link('https://vk.com/worldpeacekeaper')}"
         f"<b>Бот лагает</b>\n"
-        f"Пользователи: *сука, что за уёбок написал бота*\n"
-        f"Уёбок:"
+        f"Пользователи: кто написал бота*\n"
+        f"Я"
     )
 
 
@@ -55,57 +63,43 @@ async def cmd_content_plan(message: types.Message):
         reply_markup=get_name_cp_kb
     )
 
+
+@router.message(F.text.lower() == "trennings")
+async def cmd_content_plan(message: types.Message):
+    await message.answer(
+        "Даты на май",
+        reply_markup=get_trenning_kb()
+    )
+
+
 for i in range(1, 32):
-    if F.data == str(i):
-        @router.callback_query(F.data == str(i))
-        async def date_of_post(callback: types.CallbackQuery):
-            i = int(callback.data)
+    if F.data == f'{str(i)} 1':
+        @router.callback_query(F.data == f'{str(i)} 1')
+        async def date_of_trenning(callback: types.CallbackQuery):
+            i = int(callback.data[:2])
             await callback.message.answer(
-                f"Дата поста: {str(exel.data['date'][i - 1])}\n"
-                f"Название поста: {str(exel.data['name'][i - 1])}\n"
-                f"Автор текста: {str(exel.data['text'][i - 1])}\n"
-                f"Автор дизайна: {str(exel.data['picture'][i - 1])}",
+                f"Дата поста: {str(content[i - 1][0])}\n"
+                f"Название поста: {str(content[i - 1][1])}\n"
+                f"Автор текста: {str(content[i - 1][2])}\n"
+                f"Автор дизайна: {str(content[i - 1][3])}",
             )
 
+for i in range(1, 32):
+    if F.data == f'{str(i)} 2':
+        @router.callback_query(F.data == f'{str(i)} 2')
+        async def date_of_post(callback: types.CallbackQuery):
+            i = int(callback.data[:2])
+            print(i)
+            await callback.message.answer(
+                f"Дата треннинга: {str(trennings[i - 1][0])}\n"
+                f"Место проведения: {str(trennings[i - 1][1])}\n"
+                f"Место проведения: {str(trennings[i - 1][2])}"
 
+            )
 
-@router.callback_query(F.data == "director")
-async def send_director(callback: types.callback_query):
-    await callback.message.answer("Анастасия Переверзева")
-
-
-@router.callback_query(F.data == "organizers")
-async def send_organizers(callback: types.callback_query):
-    await callback.message.answer("Олеся Крыжановская")
-
-
-@router.callback_query(F.data == "dezigners")
-async def send_dezigners(callback: types.callback_query):
-    await callback.message.answer(
-        f"{hide_link('https://www.meme-arsenal.com/memes/f9043fd1f846222cc64e8a929ecaeed5.jpg')}"
-        f"Алина Шушкова"
-    )
-
-
-@router.callback_query(F.data == "smm")
-async def send_smm(callback: types.callback_query):
-    await callback.message.answer(
-        f"{hide_link('https://sun9-7.userapi.com/impg/7aKlRz9lGOzjhRuPSEo2ppcPVFnExSoQMwPQrw/o7wVRmuTIK4.jpg?size=2560x1920&quality=95&sign=9f96785fe91b3b60bb0b67d01096a657&type=album')}"
-        f"Дарья Гостева"
-    )
-
-
-@router.callback_query(F.data == "actors")
-async def send_actors(callback: types.callback_query):
-    await callback.message.answer(
-        f"{hide_link('https://www.meme-arsenal.com/memes/e4cbb27094a83dc2acd2e9fb68194888.jpg')}"
-        f"Ася Панина"
-    )
-
-
-@router.callback_query(F.data == "comand_founder")
-async def send_comand_founder(callback: types.callback_query):
-    await callback.message.answer(
-        f"{hide_link('https://www.meme-arsenal.com/memes/a55ad4ef8fc0f03e7c0feedb538fb736.jpg')}"
-        f"Иван Зазулин"
-    )
+for i in range(1, 8):
+    if F.data == str(i):
+        @router.callback_query(F.data == str(i))
+        async def send_director(callback: types.callback_query):
+            i = int(callback.data)
+            await callback.message.answer(dir[i - 1][1])

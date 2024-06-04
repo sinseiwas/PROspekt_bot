@@ -9,7 +9,7 @@ from keyboards.keyboards import get_start_kb
 
 
 router = Router()
-
+ADMIN_ID = 890684152
 
 @router.message(Command("start"))
 async def cmd_start(message: types.Message):
@@ -27,3 +27,5 @@ async def cmd_start(message: types.Message):
         'Официальная группа вконтакте',
         reply_markup=builder.as_markup(),
     )
+    if message.from_user.id == ADMIN_ID:
+        await message.answer('1')
