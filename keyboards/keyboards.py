@@ -54,6 +54,21 @@ def get_trenning_kb():
     return keyboard
 
 
+def get_admin_trenning_kb():
+    buttons = []
+    for i in range(1, 32, 4):
+        row = [
+            types.InlineKeyboardButton(text=f"{i}", callback_data=f"{i} a"),
+            types.InlineKeyboardButton(text=f"{i + 1}", callback_data=f"{i + 1} a"),
+            types.InlineKeyboardButton(text=f"{i + 2}", callback_data=f"{i + 2} a")
+        ]
+        if i + 3 != 32:
+            row.append(types.InlineKeyboardButton(text=f"{i + 3}", callback_data=f"{i + 3} a"))
+        buttons.append(row)
+    keyboard = types.InlineKeyboardMarkup(inline_keyboard=buttons)
+    return keyboard
+
+
 def get_name_cp_kb():
     buttons = []
     for i in text.names:
@@ -64,10 +79,16 @@ def get_name_cp_kb():
 
 def get_start_kb():
     builder = ReplyKeyboardBuilder()
-    builder.add(types.KeyboardButton(text="bosses"))
-    builder.add(types.KeyboardButton(text="bot founder"))
-    builder.add(types.KeyboardButton(text="in development"))
-    builder.add(types.KeyboardButton(text="am i alone"))
+    builder.add(types.KeyboardButton(text="directors"))
+    builder.add(types.KeyboardButton(text="content plan"))
+    builder.add(types.KeyboardButton(text="trennings"))
+    builder.adjust(2)
+
+    return builder
+
+def get_admin_kb():
+    builder = ReplyKeyboardBuilder()
+    builder.add(types.KeyboardButton(text="directors"))
     builder.add(types.KeyboardButton(text="content plan"))
     builder.add(types.KeyboardButton(text="trennings"))
     builder.adjust(2)
