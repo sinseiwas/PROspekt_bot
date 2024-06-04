@@ -13,56 +13,43 @@ import threading
 
 router = Router()
 dp = Dispatcher()
-dir = return_directors()
-content = return_content_plan()
-trennings = return_trennings_plan()
-ADMIN_ID = 890684152
+ADMIN_ID = (890684152, 943191156)
 
 
 @router.message(Command("edit_trennings"))
 async def cmd_content_plan(message: types.Message):
-
-    global user_message
-    user_message = message.text.split()
-    edit_trennings(user_message[1], user_message[2], user_message[3])
-    print(user_message)
-    await message.answer(
-        'Успешно изменено'
-    )
+    if message.from_user.id in ADMIN_ID:
+        global user_message
+        user_message = message.text.split()
+        edit_trennings(user_message[1], user_message[2], user_message[3])
+        print(user_message)
+        await message.answer(
+            'Успешно изменено'
+        )
 
 
 @router.message(Command("edit_cp"))
 async def cmd_content_plan(message: types.Message):
-    global user_message
-    user_message = message.text.split()
-    edit_cp(user_message[1], user_message[2], user_message[3], user_message[4])
-    print(user_message)
-    await message.answer(
-        'Успешно изменено'
-    )
+    if message.from_user.id in ADMIN_ID:
+        global user_message
+        user_message = message.text.split()
+        edit_cp(user_message[1], user_message[2], user_message[3], user_message[4])
+        print(user_message)
+        await message.answer(
+            'Успешно изменено'
+        )
 
 
 @router.message(Command("edit_director"))
 async def cmd_content_plan(message: types.Message):
-    global user_message
-    user_message = message.text.split()
-    edit_director(user_message[1], user_message[2])
-    print(user_message)
-    await message.answer(
-        'Успешно изменено'
-    )
-
-
-for i in range(1, 32):
-    if F.data == f'{str(i)} 2':
-        @router.callback_query(F.data == f'{str(i)} a')
-        async def date_of_post(callback: types.CallbackQuery):
-            what_2 = 1
-            i = int(callback.data[:2])
-            await callback.message.answer(
-                'На какой треннинг вы хотети поменять на эту дату?'
-
-            )
+    if message.from_user.id in ADMIN_ID:
+        global user_message
+        user_message = message.text.split()
+        edit_director(user_message[1], user_message[2])
+        print(user_message)
+        await message.answer(
+            'Успешно изменено'
+        )
 
 
 @router.message(F.text.lower() == "directors")
@@ -97,6 +84,7 @@ for i in range(1, 32):
         @router.callback_query(F.data == f'{str(i)} 1')
         async def date_of_trenning(callback: types.CallbackQuery):
             i = int(callback.data[:2])
+            content = return_content_plan()
             await callback.message.answer(
                 f"Дата поста: {str(content[i - 1][0])}\n"
                 f"Название поста: {str(content[i - 1][1])}\n"
@@ -104,12 +92,13 @@ for i in range(1, 32):
                 f"Автор дизайна: {str(content[i - 1][3])}",
             )
 
+
 for i in range(1, 32):
     if F.data == f'{str(i)} 2':
         @router.callback_query(F.data == f'{str(i)} 2')
         async def date_of_post(callback: types.CallbackQuery):
             i = int(callback.data[:2])
-            print(i)
+            trennings = return_trennings_plan()
             await callback.message.answer(
                 f"Дата треннинга: {str(trennings[i - 1][0])}\n"
                 f"Место проведения: {str(trennings[i - 1][1])}\n"
@@ -117,9 +106,11 @@ for i in range(1, 32):
 
             )
 
+
 for i in range(1, 8):
     if F.data == str(i):
         @router.callback_query(F.data == str(i))
         async def send_director(callback: types.callback_query):
             i = int(callback.data)
+            dir = return_directors()
             await callback.message.answer(dir[i - 1][1])

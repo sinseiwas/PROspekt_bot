@@ -13,6 +13,7 @@ ADMIN_ID = 890684152
 
 @router.message(Command("start"))
 async def cmd_start(message: types.Message):
+    user_id = message.from_user.id
     if message.from_user.id != ADMIN_ID:
         builder = get_start_kb()
     else:

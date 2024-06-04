@@ -118,7 +118,6 @@ def edit_trennings(changed_value_place, changed_value_name, date):
     cur.execute(f'UPDATE trennings SET place = "{changed_value_place}" WHERE date = "{date}"')
     cur.execute(f'UPDATE trennings SET name = "{changed_value_name}" WHERE date = "{date}"')
     db.commit()
-    db.close()
 
 
 # def edit_performace(changed_value, date):
@@ -133,33 +132,24 @@ def edit_cp(changed_value_name, changed_value_text, changed_value_picture , date
     cur.execute(f'UPDATE content_plan SET text = "{changed_value_text}" WHERE date = "{date}"')
     cur.execute(f'UPDATE content_plan SET picture = "{changed_value_picture}" WHERE date = "{date}"')
     db.commit()
-    db.close()
 
 
 def edit_director(changed_value, id):
-    db = sq.connect(DB_FILE)
-    # created cursor
-    cur = db.cursor()
     cur.execute(f'UPDATE directors SET name = "{changed_value}" WHERE id = "{id}"')
     db.commit()
-    db.close()
 
 def return_directors():
     cur.execute("SELECT * FROM directors")
     return cur.fetchall()
-    db.close()
 
 def return_content_plan():
     cur.execute("SELECT * FROM content_plan")
     return cur.fetchall()
-    db.close()
 
 def return_trennings_plan():
     cur.execute("SELECT * FROM trennings")
     return cur.fetchall()
-    db.close()
 
 def change_table(table_name):
     pass
 
-db.commit()
