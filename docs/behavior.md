@@ -1,7 +1,7 @@
 # ПОВЕДЕНЧЕСКИЕ МОДЕЛИ
 
 ## ПОСТАНОВКИ
-![THEATRE](https://github.com/sinseiwas/PROspekt_bot/blob/507173e5827142b6157ca4b6aea5956a9b77abde/docs/diagrams/theatre_status.png)
+![THEATRE](https://github.com/sinseiwas/PROspekt_bot/blob/98704d5081de108b2155a1c4016fec20a3d558fe/docs/diagrams/theatre_status.png)
 
 - Idle: Начальное состояние, в котором бот ожидает команду от пользователя.
 - SelectingMonth: Состояние, в котором бот предлагает пользователю выбрать месяц.
@@ -16,7 +16,7 @@
 - DisplayingTrainings: Состояние, в котором бот отображает информацию о тренингах.
 
 ## СММ
-![CONTENT PLAN](https://github.com/sinseiwas/PROspekt_bot/blob/507173e5827142b6157ca4b6aea5956a9b77abde/docs/diagrams/content_plan_status.png)
+![CONTENT PLAN](https://github.com/sinseiwas/PROspekt_bot/blob/98704d5081de108b2155a1c4016fec20a3d558fe/docs/diagrams/content_plan_status.png)
 
 - User: Пользователь взаимодействует с ботом, нажимая кнопку "СММ".
 - Bot: Телеграм бот, который принимает и отправляет сообщения.
@@ -25,7 +25,7 @@
 - ContentRepository: Репозиторий, содержащий данные о постах, используемый для получения информации.
 
 ## ДОЛЖНОСТНЫЕ ЛИЦА
-![DIRECTORS](https://github.com/sinseiwas/PROspekt_bot/blob/507173e5827142b6157ca4b6aea5956a9b77abde/docs/diagrams/director_status.png)
+![DIRECTORS](https://github.com/sinseiwas/PROspekt_bot/blob/98704d5081de108b2155a1c4016fec20a3d558fe/docs/diagrams/director_status.png)
 
 - Idle: Начальное состояние бота, когда он ожидает команду от пользователя.
 - FetchingData: Состояние, в котором бот получает данные о должностных лицах.
