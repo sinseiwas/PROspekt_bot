@@ -82,6 +82,7 @@ def get_start_kb():
     builder.add(types.KeyboardButton(text="directors"))
     builder.add(types.KeyboardButton(text="content plan"))
     builder.add(types.KeyboardButton(text="trennings"))
+    builder.add(types.KeyboardButton(text="performances"))
     builder.adjust(2)
 
     return builder
@@ -91,6 +92,7 @@ def get_admin_kb():
     builder.add(types.KeyboardButton(text="directors"))
     builder.add(types.KeyboardButton(text="content plan"))
     builder.add(types.KeyboardButton(text="trennings"))
+    builder.add(types.KeyboardButton(text="performances"))
     builder.adjust(2)
 
     return builder

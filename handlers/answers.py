@@ -6,7 +6,7 @@ from aiogram.filters import Command
 
 from random import choice
 from keyboards.keyboards import get_org_keyboard, get_cp_kb, get_name_cp_kb, get_trenning_kb, get_admin_kb, get_admin_trenning_kb
-from database_prospekt import return_directors, return_content_plan, return_trennings_plan, edit_cp, edit_trennings, edit_director
+from database_prospekt import return_directors, return_content_plan, return_trennings_plan, return_performances, edit_cp, edit_trennings, edit_director, edit_performance, insert_performance
 import time
 import threading
 
@@ -52,6 +52,32 @@ async def cmd_content_plan(message: types.Message):
         )
 
 
+@router.message(Command("edit_performance"))
+async def cmd_content_plan(message: types.Message):
+    if message.from_user.id in ADMIN_ID:
+        global user_message
+        user_message = message.text.split()
+        print(user_message)
+        edit_performance(user_message[1], user_message[2], user_message[3], user_message[4], user_message[5], user_message[6])
+        print(user_message)
+        await message.answer(
+            'Успешно изменено'
+        )
+
+
+@router.message(Command("insert_performance"))
+async def cmd_content_plan(message: types.Message):
+    if message.from_user.id in ADMIN_ID:
+        global user_message
+        user_message = message.text.split()
+        print(user_message)
+        insert_performance(user_message[1], user_message[2], user_message[3], user_message[4])
+        print(user_message)
+        await message.answer(
+            'Успешно изменено'
+        )
+
+
 @router.message(F.text.lower() == "directors")
 async def cmd_bosses(message: types.Message):
     await message.answer(
@@ -77,6 +103,16 @@ async def cmd_content_plan(message: types.Message):
         "Даты на май",
         reply_markup=get_trenning_kb()
     )
+
+
+@router.message(F.text.lower() == "performances")
+async def cmd_performances(message: types.Message):
+    performances = return_performances()
+    print(performances)
+    for i in range(len(performances)):
+        await message.answer(
+                f'месяц: {performances[i][0]}\nдата: {performances[i][1]}\nназвание: {performances[i][2]}\nместо проведения: {performances[i][3]}'
+        )
 
 
 for i in range(1, 32):

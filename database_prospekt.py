@@ -111,6 +111,23 @@ cur = db.cursor()
 # cur.execute("UPDATE trennings SET place = '-' WHERE date = '31.05.2024'")
 
 
+# cur.execute("""CREATE TABLE performances (
+#     month text,
+#     date text,
+#     name text,
+#     place text
+# )
+# """)
+
+# cur.execute("INSERT INTO performances VALUES('june', '29', 'Слова паразиты', 'Набережная')")
+# cur.execute("INSERT INTO performances VALUES('july', '15', 'Клоун Аристотель', 'АЗ ГК')")
+# cur.execute("INSERT INTO performances VALUES('july', '30', 'Времена года', 'АЗ ГК')")
+# cur.execute("INSERT INTO performances VALUES('august', '15', '12', 'АЗ ГК')")
+# cur.execute("UPDATE performances SET month = 'июнь' WHERE month = 'june'")
+# cur.execute("UPDATE performances SET month = 'июль' WHERE month = 'july'")
+# cur.execute("UPDATE performances SET month = 'август' WHERE month = 'august'")
+
+
 def edit_trennings(changed_value_place, changed_value_name, date):
     db = sq.connect(DB_FILE)
     # created cursor
@@ -120,8 +137,23 @@ def edit_trennings(changed_value_place, changed_value_name, date):
     db.commit()
 
 
-# def edit_performace(changed_value, date):
-#    cur.execute(f'UPDATE trennings SET place = "{changed_value}" WHERE date = "{date}"')
+def edit_performance(changed_value_month, changed_value_date, changed_value_name, changed_value_place, date, month):
+    db = sq.connect(DB_FILE)
+    # created cursor
+    cur = db.cursor()
+    cur.execute(f'UPDATE performances SET month = "{changed_value_month}" WHERE date = "{date}" AND month = "{month}"')
+    cur.execute(f'UPDATE performances SET date = "{changed_value_date}" WHERE date = "{date}" AND month = "{changed_value_month}"')
+    cur.execute(f'UPDATE performances SET name = "{changed_value_name}" WHERE date = "{changed_value_date}" AND month = "{changed_value_month}"')
+    cur.execute(f'UPDATE performances SET place = "{changed_value_place}" WHERE date = "{changed_value_date}" AND month = "{changed_value_month}"')
+    db.commit()
+
+
+def insert_performance(month, date, name, place):
+    db = sq.connect(DB_FILE)
+    # created cursor
+    cur = db.cursor()
+    cur.execute(f'INSERT INTO performances VALUES("{month}", "{date}", "{name}", "{place}")')
+    db.commit()
 
 
 def edit_cp(changed_value_name, changed_value_text, changed_value_picture , date):
@@ -150,6 +182,13 @@ def return_trennings_plan():
     cur.execute("SELECT * FROM trennings")
     return cur.fetchall()
 
+
+def return_performances():
+    cur.execute("SELECT * FROM performances")
+    return cur.fetchall()
+
 def change_table(table_name):
     pass
 
+
+db.commit()
