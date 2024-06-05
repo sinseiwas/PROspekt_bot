@@ -1,16 +1,15 @@
 @startuml
 package "Telegram Bot Application" {
-    [Bot] --> [Dispatcher]
-
-    [Dispatcher] --> [Router]
+    [Bot] --> [Dispatcher] : управляет
+    [Dispatcher] --> [Router] : маршрутизирует
 
     package "Handlers" {
         [MessageHandler]
         [CallbackQueryHandler]
     }
 
-    [Router] --> [MessageHandler]
-    [Router] --> [CallbackQueryHandler]
+    [Router] --> [MessageHandler] : обрабатывает сообщения
+    [Router] --> [CallbackQueryHandler] : обрабатывает запросы
 
     package "Database" {
         [DBConnector]
@@ -23,16 +22,16 @@ package "Telegram Bot Application" {
         [FileStorageService]
     }
 
-    [MessageHandler] --> [DBConnector]
-    [MessageHandler] --> [UserRepository]
-    [MessageHandler] --> [ContentRepository]
-    [MessageHandler] --> [ExternalAPI]
-    [MessageHandler] --> [FileStorageService]
+    [MessageHandler] --> [DBConnector] : подключается к
+    [MessageHandler] --> [UserRepository] : использует
+    [MessageHandler] --> [ContentRepository] : использует
+    [MessageHandler] --> [ExternalAPI] : взаимодействует с
+    [MessageHandler] --> [FileStorageService] : взаимодействует с
 
-    [CallbackQueryHandler] --> [DBConnector]
-    [CallbackQueryHandler] --> [UserRepository]
-    [CallbackQueryHandler] --> [ContentRepository]
-    [CallbackQueryHandler] --> [ExternalAPI]
-    [CallbackQueryHandler] --> [FileStorageService]
+    [CallbackQueryHandler] --> [DBConnector] : подключается к
+    [CallbackQueryHandler] --> [UserRepository] : использует
+    [CallbackQueryHandler] --> [ContentRepository] : использует
+    [CallbackQueryHandler] --> [ExternalAPI] : взаимодействует с
+    [CallbackQueryHandler] --> [FileStorageService] : взаимодействует с
 }
 @enduml
