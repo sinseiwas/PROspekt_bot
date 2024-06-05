@@ -5,6 +5,7 @@ from aiogram.utils.markdown import hide_link
 from aiogram.filters import Command
 
 from random import choice
+from .start import ADMIN_ID, is_admin
 from keyboards.keyboards import get_org_keyboard, get_cp_kb, get_name_cp_kb, get_trenning_kb, get_admin_kb, get_admin_trenning_kb
 from database_prospekt import return_directors, return_content_plan, return_trennings_plan, return_performances, edit_cp, edit_trennings, edit_director, edit_performance, insert_performance
 import time
@@ -14,13 +15,6 @@ import threading
 router = Router()
 dp = Dispatcher()
 
-
-ADMIN_ID = (890684152, 943191156)
-def is_admin(user_id):
-    for i in range(len(ADMIN_ID)):
-        if user_id == ADMIN_ID[i]:
-            return 1
-    return 0
 
 @router.message(Command("edit_trennings"))
 async def cmd_content_plan(message: types.Message):
