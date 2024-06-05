@@ -9,12 +9,17 @@ from keyboards.keyboards import get_start_kb, get_admin_kb
 
 
 router = Router()
-ADMIN_ID = 890684152
+ADMIN_ID = (890684152, 943191156)
+def is_admin(user_id):
+    for i in range(len(ADMIN_ID)):
+        if user_id == ADMIN_ID[i]:
+            return 1
+    return 0
 
 @router.message(Command("start"))
 async def cmd_start(message: types.Message):
     user_id = message.from_user.id
-    if message.from_user.id != ADMIN_ID:
+    if not is_admin(message.from_user.id):
         builder = get_start_kb()
     else:
         builder = get_admin_kb()

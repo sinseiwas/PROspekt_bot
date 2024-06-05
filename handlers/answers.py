@@ -13,12 +13,18 @@ import threading
 
 router = Router()
 dp = Dispatcher()
-ADMIN_ID = (890684152, 943191156)
 
+
+ADMIN_ID = (890684152, 943191156)
+def is_admin(user_id):
+    for i in range(len(ADMIN_ID)):
+        if user_id == ADMIN_ID[i]:
+            return 1
+    return 0
 
 @router.message(Command("edit_trennings"))
 async def cmd_content_plan(message: types.Message):
-    if message.from_user.id in ADMIN_ID:
+    if is_admin(message.from_user.id):
         global user_message
         user_message = message.text.split()
         edit_trennings(user_message[1], user_message[2], user_message[3])
@@ -30,7 +36,7 @@ async def cmd_content_plan(message: types.Message):
 
 @router.message(Command("edit_cp"))
 async def cmd_content_plan(message: types.Message):
-    if message.from_user.id in ADMIN_ID:
+    if is_admin(message.from_user.id):
         global user_message
         user_message = message.text.split()
         edit_cp(user_message[1], user_message[2], user_message[3], user_message[4])
@@ -42,7 +48,7 @@ async def cmd_content_plan(message: types.Message):
 
 @router.message(Command("edit_director"))
 async def cmd_content_plan(message: types.Message):
-    if message.from_user.id in ADMIN_ID:
+    if is_admin(message.from_user.id):
         global user_message
         user_message = message.text.split()
         edit_director(user_message[1], user_message[2])
@@ -54,7 +60,7 @@ async def cmd_content_plan(message: types.Message):
 
 @router.message(Command("edit_performance"))
 async def cmd_content_plan(message: types.Message):
-    if message.from_user.id in ADMIN_ID:
+    if is_admin(message.from_user.id):
         global user_message
         user_message = message.text.split()
         print(user_message)
@@ -67,7 +73,7 @@ async def cmd_content_plan(message: types.Message):
 
 @router.message(Command("insert_performance"))
 async def cmd_content_plan(message: types.Message):
-    if message.from_user.id in ADMIN_ID:
+    if is_admin(message.from_user.id):
         global user_message
         user_message = message.text.split()
         print(user_message)
