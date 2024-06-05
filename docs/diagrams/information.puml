@@ -3,12 +3,22 @@ left to right direction
 actor User as U
 rectangle "Театральное приложение" {
     usecase "Просмотр информации о должностных лицах" as A
-    usecase "Просмотр информации об контент-плане" as B
+    usecase "Просмотр информации о контент-плане" as B
     usecase "Просмотр информации о постановках" as C
     usecase "Просмотр информации о треннингах" as D
-    U --> (A)
-    U --> (B)
-    U --> (C)
-    U --> (D)
+    usecase "Редактирование информации о треннингах" as E
+    usecase "Редактирование информации о контент-плане" as F
+    usecase "Редактирование информации о постановках" as G
+    usecase "Редактирование информации о должностных лицах" as H
+    usecase "Добавление новой постановки" as I
+    U --> A : «User»
+    U --> B : «User»
+    U --> C : «User»
+    U --> D : «User»
+    U --> E : «Admin»
+    U --> F : «Admin»
+    U --> G : «Admin»
+    U --> H : «Admin»
+    U --> I : «Admin»
 }
 @enduml
