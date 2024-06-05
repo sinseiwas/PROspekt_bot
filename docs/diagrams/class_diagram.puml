@@ -39,6 +39,6 @@ TelegramBot --> BotDispatcher : управляет
 BotDispatcher --> Router : использует
 Router --> MessageHandler : обрабатывает
 Router --> CallbackQueryHandler : обрабатывает
-MessageHandler --> Database : обращается к базе данных
-CallbackQueryHandler --> Database : обращается к базе данных
+MessageHandler <--> Database : обращается к базе данных
+CallbackQueryHandler <--> Database : обращается к базе данных
 CustomKeyboards --> Router : создает
