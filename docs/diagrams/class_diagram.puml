@@ -1,14 +1,13 @@
-@startuml
-class Bot {
+class TelegramBot {
     - token: str
     - parse_mode: str
     + start()
     + stop()
 }
 
-class Dispatcher {
+class BotDispatcher {
     + include_routers(routers: list)
-    + start_polling(bot: Bot)
+    + start_polling(bot: TelegramBot)
 }
 
 class Router {
@@ -24,22 +23,22 @@ class CallbackQueryHandler {
     + handle_callback_query(callback_query: CallbackQuery)
 }
 
-class Excel {
-    + data: dict
+class Database {
+    + query(sql: str)
+    + commit()
 }
 
-class Keyboards {
+class CustomKeyboards {
     + get_org_keyboard(): InlineKeyboardMarkup
     + get_cp_kb(): InlineKeyboardMarkup
     + get_name_cp_kb(): InlineKeyboardMarkup
     + get_start_kb(): ReplyKeyboardMarkup
 }
 
-Bot --> Dispatcher
-Dispatcher --> Router
-Router --> MessageHandler
-Router --> CallbackQueryHandler
-MessageHandler --> Excel
-CallbackQueryHandler --> Excel
-Keyboards --> Router
-@enduml
+TelegramBot --> BotDispatcher : управляет
+BotDispatcher --> Router : использует
+Router --> MessageHandler : обрабатывает
+Router --> CallbackQueryHandler : обрабатывает
+MessageHandler --> Database : обращается к базе данных
+CallbackQueryHandler --> Database : обращается к базе данных
+CustomKeyboards --> Router : создает
