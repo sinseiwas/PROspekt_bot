@@ -7,7 +7,7 @@ from database_prospekt import get_script_dir, DB_NAME, DB_FILE
 
 
 async def main():
-    bot = Bot(token="6974256244:AAFwzF8cqPoSN_jiHPdu1Mw9PDChUCyRQv0", parse_mode="HTML")
+    bot = Bot(token="6974256244:AAFwzF8cqPoSN_jiHPdu1Mw9PDChUCyRQv0")
     dp = Dispatcher()
 
     dp.include_routers(start.router, answers.router)
