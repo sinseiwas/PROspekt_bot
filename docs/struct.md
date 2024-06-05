@@ -55,7 +55,7 @@
 
 ## ДИАГРАММА КОМПОНЕНТОВ
 
-![COMPONENT DIAGRAM](https://github.com/sinseiwas/PROspekt_bot/blob/6b714e3bdfb29a6f2e50132f1927614de408fe75/docs/diagrams/component_diagram.png)
+![COMPONENT DIAGRAM](https://github.com/sinseiwas/PROspekt_bot/blob/f2e677db6c02a408abd6ac0dca202f4b1c9c182a/docs/diagrams/component_diagram.png)
 
 ### Диаграмма компонентов показывает основные компоненты приложения и взаимодействие между ними.
 
