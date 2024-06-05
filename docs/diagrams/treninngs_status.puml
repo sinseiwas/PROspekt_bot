@@ -7,4 +7,11 @@ FetchingTrainings : Получение информации о тренинга�
 FetchingTrainings --> DisplayingTrainings : Информация получена
 DisplayingTrainings : Отображение информации о тренингах
 DisplayingTrainings --> Idle : Ожидание следующей команды
+
+FetchEditTraining : Редактирование тренинга
+FetchEditTraining --> Idle : Отмена
+FetchEditTraining --> EditingTrainingInfo : Подтверждение
+
+EditingTrainingInfo : Редактирование тренинга
+EditingTrainingInfo --> Idle : Завершение
 @enduml

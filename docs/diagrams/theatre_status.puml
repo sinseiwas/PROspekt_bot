@@ -9,4 +9,11 @@ FetchingPerformances : Получение постановок
 FetchingPerformances --> DisplayingPerformances : Постановки получены
 DisplayingPerformances : Отображение постановок
 DisplayingPerformances --> Idle : Ожидание следующей команды
+
+FetchEditPerformance : Редактирование постановки
+FetchEditPerformance --> Idle : Отмена
+FetchEditPerformance --> EditingPerformanceInfo : Подтверждение
+
+EditingPerformanceInfo : Редактирование постановки
+EditingPerformanceInfo --> Idle : Завершение
 @enduml

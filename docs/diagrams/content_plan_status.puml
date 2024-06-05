@@ -7,4 +7,11 @@ FetchingSMMData : Получение данных о постах
 FetchingSMMData --> DisplayingSMMData : Данные о постах получены
 DisplayingSMMData : Отображение данных о постах
 DisplayingSMMData --> Idle : Ожидание следующей команды
+
+FetchEditSMM : Редактирование поста
+FetchEditSMM --> Idle : Отмена
+FetchEditSMM --> EditingSMMData : Подтверждение
+
+EditingSMMData : Редактирование поста
+EditingSMMData --> Idle : Завершение
 @enduml

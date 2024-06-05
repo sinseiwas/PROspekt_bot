@@ -11,4 +11,11 @@ FetchingInfo : Получение информации
 FetchingInfo --> DisplayingInfo : Информация получена
 DisplayingInfo : Отображение информации
 DisplayingInfo --> Idle : Ожидание следующей команды
+
+FetchEditPosition : Редактирование информации о должностном лице
+FetchEditPosition --> Idle : Отмена
+FetchEditPosition --> EditingPositionInfo : Подтверждение
+
+EditingPositionInfo : Редактирование информации о должностном лице
+EditingPositionInfo --> Idle : Завершение
 @enduml
