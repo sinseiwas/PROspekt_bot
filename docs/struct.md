@@ -2,7 +2,7 @@
 
 ## ДИАГРАММА КЛАССОВ
 
-![CLASS DIAGRAM](https://github.com/sinseiwas/PROspekt_bot/blob/6b714e3bdfb29a6f2e50132f1927614de408fe75/docs/diagrams/class_diagram.png)
+![CLASS DIAGRAM](https://github.com/sinseiwas/PROspekt_bot/blob/d404fb243ac54f0fedbe7d3fc0a445a08e3b3952/docs/diagrams/class_diagram.png)
 
 ### Диаграмма классов представляет собой описание структуры и взаимодействия классов в приложении.
 
