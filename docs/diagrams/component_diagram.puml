@@ -22,16 +22,16 @@ package "Telegram Bot Application" {
         [FileStorageService]
     }
 
-    [MessageHandler] --> [DBConnector] : подключается к
-    [MessageHandler] --> [UserRepository] : использует
-    [MessageHandler] --> [ContentRepository] : использует
-    [MessageHandler] --> [ExternalAPI] : взаимодействует с
-    [MessageHandler] --> [FileStorageService] : взаимодействует с
+    [MessageHandler] <--> [DBConnector] : подключается к
+    [MessageHandler] <--> [UserRepository] : использует
+    [MessageHandler] <--> [ContentRepository] : использует
+    [MessageHandler] <--> [ExternalAPI] : взаимодействует с
+    [MessageHandler] <--> [FileStorageService] : взаимодействует с
 
-    [CallbackQueryHandler] --> [DBConnector] : подключается к
-    [CallbackQueryHandler] --> [UserRepository] : использует
-    [CallbackQueryHandler] --> [ContentRepository] : использует
-    [CallbackQueryHandler] --> [ExternalAPI] : взаимодействует с
-    [CallbackQueryHandler] --> [FileStorageService] : взаимодействует с
+    [CallbackQueryHandler] <--> [DBConnector] : подключается к
+    [CallbackQueryHandler] <--> [UserRepository] : использует
+    [CallbackQueryHandler] <--> [ContentRepository] : использует
+    [CallbackQueryHandler] <--> [ExternalAPI] : взаимодействует с
+    [CallbackQueryHandler] <--> [FileStorageService] : взаимодействует с
 }
 @enduml
