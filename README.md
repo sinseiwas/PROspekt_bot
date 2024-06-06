@@ -32,3 +32,4 @@ TG BOT
 - [Функциональные модели](docs/functions.md)
 - [Структурные модели](docs/struct.md)
 - [Поведенческие модели](docs/behavior.md)
+- [Описание тестов](docs/descriptions.md)
