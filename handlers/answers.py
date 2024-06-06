@@ -59,7 +59,6 @@ async def cmd_content_plan(message: types.Message):
         user_message = message.text.split()
         print(user_message)
         edit_performance(user_message[1], user_message[2], user_message[3], user_message[4], user_message[5], user_message[6])
-        print(user_message)
         await message.answer(
             'Успешно изменено'
         )
@@ -83,6 +82,7 @@ async def cmd_bosses(message: types.Message):
     await message.answer(
         "О ком вы бы хотели узнать больше?", reply_markup=get_org_keyboard()
     )
+    
 
 
 @router.message(F.text.lower() == "content plan")
@@ -90,10 +90,6 @@ async def cmd_content_plan(message: types.Message):
     await message.answer(
         "Даты на май",
         reply_markup=get_cp_kb()
-    )
-    await message.answer(
-        "Тексты на март",
-        reply_markup=get_name_cp_kb
     )
 
 
@@ -115,7 +111,7 @@ async def cmd_performances(message: types.Message):
         )
 
 
-for i in range(1, 32):
+for i in range(1,len(return_content_plan()) + 1):
     if F.data == f'{str(i)} 1':
         @router.callback_query(F.data == f'{str(i)} 1')
         async def date_of_trenning(callback: types.CallbackQuery):
@@ -127,9 +123,10 @@ for i in range(1, 32):
                 f"Автор текста: {str(content[i - 1][2])}\n"
                 f"Автор дизайна: {str(content[i - 1][3])}",
             )
+            await callback.answer()
 
 
-for i in range(1, 32):
+for i in range(1, len(return_trennings_plan()) + 1):
     if F.data == f'{str(i)} 2':
         @router.callback_query(F.data == f'{str(i)} 2')
         async def date_of_post(callback: types.CallbackQuery):
@@ -141,12 +138,14 @@ for i in range(1, 32):
                 f"Место проведения: {str(trennings[i - 1][2])}"
 
             )
+            await callback.answer()
 
 
-for i in range(1, 8):
+for i in range(1, len(return_directors()) + 1):
     if F.data == str(i):
         @router.callback_query(F.data == str(i))
         async def send_director(callback: types.callback_query):
             i = int(callback.data)
             dir = return_directors()
             await callback.message.answer(dir[i - 1][1])
+            await callback.answer()
