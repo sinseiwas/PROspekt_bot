@@ -5,7 +5,7 @@ from aiogram.utils.markdown import hide_link
 from aiogram.filters import Command
 
 from random import choice
-from .start import ADMIN_ID, is_admin
+from start import ADMIN_ID, is_admin
 from keyboards.keyboards import get_org_keyboard, get_cp_kb, get_name_cp_kb, get_trenning_kb, get_admin_kb, get_admin_trenning_kb
 from database_prospekt import return_directors, return_content_plan, return_trennings_plan, return_performances, edit_cp, edit_trennings, edit_director, edit_performance, insert_performance
 import time

@@ -1,6 +1,7 @@
 import asyncio
 from aiogram import Bot, Dispatcher
-from handlers import start, answers
+import start
+import answers
 from aiogram.utils.markdown import hide_link
 
 from database_prospekt import get_script_dir, DB_NAME, DB_FILE

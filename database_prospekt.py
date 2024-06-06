@@ -128,7 +128,7 @@ cur = db.cursor()
 # cur.execute("UPDATE performances SET month = 'август' WHERE month = 'august'")
 
 
-def edit_trennings(changed_value_place, changed_value_name, date):
+def edit_trennings(changed_value_place, changed_value_name, date, DB_FILE = DB_FILE):
     db = sq.connect(DB_FILE)
     # created cursor
     cur = db.cursor()
@@ -137,7 +137,7 @@ def edit_trennings(changed_value_place, changed_value_name, date):
     db.commit()
 
 
-def edit_performance(changed_value_month, changed_value_date, changed_value_name, changed_value_place, date, month):
+def edit_performance(changed_value_month, changed_value_date, changed_value_name, changed_value_place, date, month, DB_FILE = DB_FILE):
     db = sq.connect(DB_FILE)
     # created cursor
     cur = db.cursor()
@@ -148,7 +148,7 @@ def edit_performance(changed_value_month, changed_value_date, changed_value_name
     db.commit()
 
 
-def insert_performance(month, date, name, place):
+def insert_performance(month, date, name, place, DB_FILE = DB_FILE):
     db = sq.connect(DB_FILE)
     # created cursor
     cur = db.cursor()
@@ -156,7 +156,7 @@ def insert_performance(month, date, name, place):
     db.commit()
 
 
-def edit_cp(changed_value_name, changed_value_text, changed_value_picture , date):
+def edit_cp(changed_value_name, changed_value_text, changed_value_picture , date, DB_FILE = DB_FILE):
     db = sq.connect(DB_FILE)
     # created cursor
     cur = db.cursor()
@@ -166,24 +166,39 @@ def edit_cp(changed_value_name, changed_value_text, changed_value_picture , date
     db.commit()
 
 
-def edit_director(changed_value, id):
+def edit_director(changed_value, id, DB_FILE = DB_FILE):
+    db = sq.connect(DB_FILE)
+    # created cursor
+    cur = db.cursor()
     cur.execute(f'UPDATE directors SET name = "{changed_value}" WHERE id = "{id}"')
     db.commit()
 
-def return_directors():
+def return_directors(DB_FILE = DB_FILE):
+    db = sq.connect(DB_FILE)
+    # created cursor
+    cur = db.cursor()
     cur.execute("SELECT * FROM directors")
     return cur.fetchall()
 
-def return_content_plan():
+def return_content_plan(DB_FILE = DB_FILE):
+    db = sq.connect(DB_FILE)
+    # created cursor
+    cur = db.cursor()
     cur.execute("SELECT * FROM content_plan")
     return cur.fetchall()
 
-def return_trennings_plan():
+def return_trennings_plan(DB_FILE = DB_FILE):
+    db = sq.connect(DB_FILE)
+    # created cursor
+    cur = db.cursor()
     cur.execute("SELECT * FROM trennings")
     return cur.fetchall()
 
 
-def return_performances():
+def return_performances(DB_FILE = DB_FILE):
+    db = sq.connect(DB_FILE)
+    # created cursor
+    cur = db.cursor()
     cur.execute("SELECT * FROM performances")
     return cur.fetchall()
 
