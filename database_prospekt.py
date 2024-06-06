@@ -202,8 +202,5 @@ def return_performances(DB_FILE = DB_FILE):
     cur.execute("SELECT * FROM performances")
     return cur.fetchall()
 
-def change_table(table_name):
-    pass
-
 
 db.commit()
