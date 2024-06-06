@@ -1,3 +1,10 @@
+[![CI/CD GitHub Actions](https://github.com/sinseiwas/PROspekt_bot/actions/workflows/main.yml/badge.svg)](https://github.com/sinseiwas/PROspekt_bot/actions/workflows/test-action.yml)
+[![Coverage Status](https://coveralls.io/repos/sinseiwas/PROspekt_bot/badge.svg?branch=master)](https://coveralls.io/github/sinseiwas/PROspekt_bot?branch=master)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=sinseiwas_PROspekt_bot&metric=alert_status)](https://sonarcloud.io/dashboard?id=sinseiwas_PROspekt_bot)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=seekerk_ctest&metric=bugs)](https://sonarcloud.io/summary/new_code?id=seekerk_ctest)
+[![Code smells](https://sonarcloud.io/api/project_badges/measure?project=sinseiwas_PROspekt_bot&metric=code_smells)](https://sonarcloud.io/dashboard?id=sinseiwas_PROspekt_bot)
+
+
 # PROJECT
 TG BOT
 
