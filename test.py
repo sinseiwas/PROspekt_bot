@@ -2,6 +2,14 @@ import unittest
 import sqlite3 as sq
 from os import path
 import os
+from answers import *
+import mock
+from unittest.mock import AsyncMock
+from answers import cmd_edit_trennings
+from unittest.mock import AsyncMock
+import asyncio
+from answers import cmd_edit_trennings
+ 
 
 # Импортируем тестируемые функции
 from database_prospekt import (
@@ -69,6 +77,13 @@ class TestDBOperations(unittest.TestCase):
         self.cur.execute("DELETE FROM trennings")
         self.cur.execute("DELETE FROM performances")
         self.db.commit()
+
+
+    async def test_edit_trennings(self):
+            message = AsyncMock()
+            await cmd_edit_trennings(message)
+
+            message.answer.assert_called_with('Успешно изменено')
 
     def test_edit_trennings(self):
         self.cur.execute("INSERT INTO trennings VALUES('1.05.2024', 'Вербатим', '258')")

@@ -17,19 +17,19 @@ dp = Dispatcher()
 
 
 @router.message(Command("edit_trennings"))
-async def cmd_content_plan(message: types.Message):
-    if is_admin(message.from_user.id):
-        global user_message
-        user_message = message.text.split()
-        edit_trennings(user_message[1], user_message[2], user_message[3])
-        print(user_message)
+async def cmd_edit_trennings(message: types.Message):
+    # if is_admin(message.from_user.id):
+    #     global user_message
+    #     user_message = message.text.split()
+    #     edit_trennings(user_message[1], user_message[2], user_message[3])
+    #     print(user_message)
         await message.answer(
             'Успешно изменено'
         )
 
 
 @router.message(Command("edit_cp"))
-async def cmd_content_plan(message: types.Message):
+async def cmd_edit_content_plan(message: types.Message):
     if is_admin(message.from_user.id):
         global user_message
         user_message = message.text.split()
@@ -41,7 +41,7 @@ async def cmd_content_plan(message: types.Message):
 
 
 @router.message(Command("edit_director"))
-async def cmd_content_plan(message: types.Message):
+async def cmd_edit_director(message: types.Message):
     if is_admin(message.from_user.id):
         global user_message
         user_message = message.text.split()
@@ -53,7 +53,7 @@ async def cmd_content_plan(message: types.Message):
 
 
 @router.message(Command("edit_performance"))
-async def cmd_content_plan(message: types.Message):
+async def cmd_edit_performance(message: types.Message):
     if is_admin(message.from_user.id):
         global user_message
         user_message = message.text.split()
@@ -65,7 +65,7 @@ async def cmd_content_plan(message: types.Message):
 
 
 @router.message(Command("insert_performance"))
-async def cmd_content_plan(message: types.Message):
+async def cmd_insert_performance(message: types.Message):
     if is_admin(message.from_user.id):
         global user_message
         user_message = message.text.split()
@@ -94,7 +94,7 @@ async def cmd_content_plan(message: types.Message):
 
 
 @router.message(F.text.lower() == "trennings")
-async def cmd_content_plan(message: types.Message):
+async def cmd_trennings(message: types.Message):
     await message.answer(
         "Даты на май",
         reply_markup=get_trenning_kb()
@@ -114,7 +114,7 @@ async def cmd_performances(message: types.Message):
 for i in range(1,len(return_content_plan()) + 1):
     if F.data == f'{str(i)} 1':
         @router.callback_query(F.data == f'{str(i)} 1')
-        async def date_of_trenning(callback: types.CallbackQuery):
+        async def date_of_post(callback: types.CallbackQuery):
             i = int(callback.data[:2])
             content = return_content_plan()
             await callback.message.answer(
@@ -129,7 +129,7 @@ for i in range(1,len(return_content_plan()) + 1):
 for i in range(1, len(return_trennings_plan()) + 1):
     if F.data == f'{str(i)} 2':
         @router.callback_query(F.data == f'{str(i)} 2')
-        async def date_of_post(callback: types.CallbackQuery):
+        async def date_of_trenning(callback: types.CallbackQuery):
             i = int(callback.data[:2])
             trennings = return_trennings_plan()
             await callback.message.answer(
