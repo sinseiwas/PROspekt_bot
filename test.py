@@ -192,7 +192,7 @@ class TestMocking(unittest.IsolatedAsyncioTestCase):
         message.answer.assert_called_with('Успешно изменено')
 
 
-    async def test_edit_cp(self):
+    async def test_edit_director(self):
         message = AsyncMock()
         await cmd_edit_director(message)
 
