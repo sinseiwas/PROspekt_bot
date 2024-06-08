@@ -6,7 +6,7 @@ from answers import *
 import asyncio
 from unittest.mock import AsyncMock, patch, MagicMock
 from aiogram import types
-from aiogram.types import Message
+from aiogram.types import Message, CallbackQuery
 import tracemalloc
 tracemalloc.start()
 
@@ -182,7 +182,6 @@ class TestMocking(unittest.IsolatedAsyncioTestCase):
     async def test_edit_trennings(self):
         message = AsyncMock()
         message.from_user.id = 890684152
-        global user_message
         message.text = '/edit_trennings param1 param2 31.05.2024'
 
         await cmd_edit_trennings(message)
@@ -192,6 +191,9 @@ class TestMocking(unittest.IsolatedAsyncioTestCase):
     
     async def test_edit_cp(self):
         message = AsyncMock()
+        message.from_user.id = 890684152
+        message.text = '/edit_cp param1 param2 param3 31.05.2024'
+
         await cmd_edit_content_plan(message)
 
         message.answer.assert_called_with('Успешно изменено')
@@ -199,10 +201,112 @@ class TestMocking(unittest.IsolatedAsyncioTestCase):
 
     async def test_edit_director(self):
         message = AsyncMock()
+        message.from_user.id = 890684152
+        message.text = '/edit_directors param1 1'
+
         await cmd_edit_director(message)
 
         message.answer.assert_called_with('Успешно изменено')
 
+    
+    async def test_edit_performace(self):
+        message = AsyncMock()
+        message.from_user.id = 890684152
+        message.text = '/edit_performance param1 param2 param3 param4 param5 param6'
+
+        await cmd_edit_performance(message)
+
+        message.answer.assert_called_with('Успешно изменено')
+
+
+    async def test_insert_performance(self):
+        message = AsyncMock()
+        message.from_user.id = 890684152
+        message.text = '/insert_performance param1 param2 param3 param4'
+
+        await cmd_insert_performance(message)
+
+        message.answer.assert_called_with('Успешно изменено')
+    
+
+    async def test_directors(self):
+        message = AsyncMock()
+
+        await cmd_bosses(message)
+
+        message.answer.assert_called_with("О ком вы бы хотели узнать больше?", reply_markup=get_org_keyboard())
+
+    
+    async def test_content_plan(self):
+        message = AsyncMock()
+
+        await cmd_content_plan(message)
+
+        message.answer.assert_called_with("Даты на май", reply_markup=get_cp_kb())
+
+
+    async def test_trennings(self):
+        message = AsyncMock()
+
+        await cmd_trennings(message)
+
+        message.answer.assert_called_with("Даты на май", reply_markup=get_trenning_kb())
+    
+
+    async def test_performances(self):
+        message = AsyncMock()
+
+        await cmd_performances(message)
+
+        performances = [
+            ['param1', 'param2', 'param3', 'param4'],
+        ]
+
+        for i in range(len(performances)):
+            message.answer.assert_called_with(f'месяц: {performances[i][0]}\nдата: {performances[i][1]}\nназвание: {performances[i][2]}\nместо проведения: {performances[i][3]}')
+
+
+    async def test_date_of_post(self):
+        callback = AsyncMock()
+        callback.data = '1 1'
+
+        await cmd_date_of_post(callback)
+
+        content = return_content_plan()
+        i = 1
+
+        callback.message.answer.assert_called_with(f"Дата поста: {str(content[i - 1][0])}\n"
+                f"Название поста: {str(content[i - 1][1])}\n"
+                f"Автор текста: {str(content[i - 1][2])}\n"
+                f"Автор дизайна: {str(content[i - 1][3])}",
+                )
+
+
+    async def test_date_of_trenning(self):
+        callback = AsyncMock()
+        callback.data = '1 2'
+
+        await cmd_date_of_trenning(callback)
+
+        trennings = return_trennings_plan()
+        i = 1
+
+        callback.message.answer.assert_called_with(f"Дата треннинга: {str(trennings[i - 1][0])}\n"
+                f"Место проведения: {str(trennings[i - 1][1])}\n"
+                f"Место проведения: {str(trennings[i - 1][2])}"
+                )
+    
+
+    async def test_send_director(self):
+        callback = AsyncMock()
+        callback.data = '1'
+
+        await cmd_send_director(callback)
+
+        dir = return_directors()
+        i = 1
+
+        callback.message.answer.assert_called_with(dir[i - 1][1])
 
 if __name__ == '__main__':
     unittest.main()

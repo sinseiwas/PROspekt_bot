@@ -29,11 +29,10 @@ async def cmd_edit_trennings(message: types.Message):
 
 @router.message(Command("edit_cp"))
 async def cmd_edit_content_plan(message: types.Message):
-    # if is_admin(message.from_user.id):
-    #     global user_message
-    #     user_message = message.text.split()
-    #     edit_cp(user_message[1], user_message[2], user_message[3], user_message[4])
-    #     print(user_message)
+    if is_admin(message.from_user.id):
+        global user_message
+        user_message = message.text.split()
+        edit_cp(user_message[1], user_message[2], user_message[3], user_message[4])
         await message.answer(
             'Успешно изменено'
         )
@@ -41,11 +40,10 @@ async def cmd_edit_content_plan(message: types.Message):
 
 @router.message(Command("edit_director"))
 async def cmd_edit_director(message: types.Message):
-    # if is_admin(message.from_user.id):
-    #     global user_message
-    #     user_message = message.text.split()
-    #     edit_director(user_message[1], user_message[2])
-    #     print(user_message)
+    if is_admin(message.from_user.id):
+        global user_message
+        user_message = message.text.split()
+        edit_director(user_message[1], user_message[2])
         await message.answer(
             'Успешно изменено'
         )
@@ -56,7 +54,6 @@ async def cmd_edit_performance(message: types.Message):
     if is_admin(message.from_user.id):
         global user_message
         user_message = message.text.split()
-        print(user_message)
         edit_performance(user_message[1], user_message[2], user_message[3], user_message[4], user_message[5], user_message[6])
         await message.answer(
             'Успешно изменено'
@@ -68,9 +65,7 @@ async def cmd_insert_performance(message: types.Message):
     if is_admin(message.from_user.id):
         global user_message
         user_message = message.text.split()
-        print(user_message)
         insert_performance(user_message[1], user_message[2], user_message[3], user_message[4])
-        print(user_message)
         await message.answer(
             'Успешно изменено'
         )
@@ -103,7 +98,6 @@ async def cmd_trennings(message: types.Message):
 @router.message(F.text.lower() == "performances")
 async def cmd_performances(message: types.Message):
     performances = return_performances()
-    print(performances)
     for i in range(len(performances)):
         await message.answer(
                 f'месяц: {performances[i][0]}\nдата: {performances[i][1]}\nназвание: {performances[i][2]}\nместо проведения: {performances[i][3]}'
@@ -113,7 +107,7 @@ async def cmd_performances(message: types.Message):
 for i in range(1,len(return_content_plan()) + 1):
     if F.data == f'{str(i)} 1':
         @router.callback_query(F.data == f'{str(i)} 1')
-        async def date_of_post(callback: types.CallbackQuery):
+        async def cmd_date_of_post(callback: types.CallbackQuery):
             i = int(callback.data[:2])
             content = return_content_plan()
             await callback.message.answer(
@@ -128,14 +122,13 @@ for i in range(1,len(return_content_plan()) + 1):
 for i in range(1, len(return_trennings_plan()) + 1):
     if F.data == f'{str(i)} 2':
         @router.callback_query(F.data == f'{str(i)} 2')
-        async def date_of_trenning(callback: types.CallbackQuery):
+        async def cmd_date_of_trenning(callback: types.CallbackQuery):
             i = int(callback.data[:2])
             trennings = return_trennings_plan()
             await callback.message.answer(
                 f"Дата треннинга: {str(trennings[i - 1][0])}\n"
                 f"Место проведения: {str(trennings[i - 1][1])}\n"
                 f"Место проведения: {str(trennings[i - 1][2])}"
-
             )
             await callback.answer()
 
@@ -143,7 +136,7 @@ for i in range(1, len(return_trennings_plan()) + 1):
 for i in range(1, len(return_directors()) + 1):
     if F.data == str(i):
         @router.callback_query(F.data == str(i))
-        async def send_director(callback: types.callback_query):
+        async def cmd_send_director(callback: types.callback_query):
             i = int(callback.data)
             dir = return_directors()
             await callback.message.answer(dir[i - 1][1])
