@@ -18,10 +18,10 @@ dp = Dispatcher()
 
 @router.message(Command("edit_trennings"))
 async def cmd_edit_trennings(message: types.Message):
-    # if is_admin(message.from_user.id):
-    #     global user_message
-    #     user_message = message.text.split()
-    #     edit_trennings(user_message[1], user_message[2], user_message[3])
+    if is_admin(message.from_user.id):
+        global user_message
+        user_message = message.text.split()
+        edit_trennings(user_message[1], user_message[2], user_message[3])
         await message.answer(
             'Успешно изменено'
         )

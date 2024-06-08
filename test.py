@@ -3,11 +3,13 @@ import sqlite3 as sq
 from os import path
 import os
 from answers import *
-from unittest.mock import AsyncMock
-from answers import cmd_edit_trennings
 import asyncio
-from answers import cmd_edit_trennings
- 
+from unittest.mock import AsyncMock, patch, MagicMock
+from aiogram import types
+from aiogram.types import Message
+import tracemalloc
+tracemalloc.start()
+
 
 # Импортируем тестируемые функции
 from database_prospekt import (
@@ -176,10 +178,13 @@ class TestDBOperations(unittest.TestCase):
         ])
 
 
-
 class TestMocking(unittest.IsolatedAsyncioTestCase):
     async def test_edit_trennings(self):
         message = AsyncMock()
+        message.from_user.id = 890684152
+        global user_message
+        message.text = '/edit_trennings param1 param2 31.05.2024'
+
         await cmd_edit_trennings(message)
 
         message.answer.assert_called_with('Успешно изменено')
