@@ -3,6 +3,7 @@ from unittest.mock import AsyncMock
 import pytest
 
 from answers import cmd_edit_trennings
+from database_prospekt import edit_trennings
 
 
 @pytest.mark.asyncio

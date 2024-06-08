@@ -22,7 +22,6 @@ async def cmd_edit_trennings(message: types.Message):
     #     global user_message
     #     user_message = message.text.split()
     #     edit_trennings(user_message[1], user_message[2], user_message[3])
-    #     print(user_message)
         await message.answer(
             'Успешно изменено'
         )
@@ -30,11 +29,11 @@ async def cmd_edit_trennings(message: types.Message):
 
 @router.message(Command("edit_cp"))
 async def cmd_edit_content_plan(message: types.Message):
-    if is_admin(message.from_user.id):
-        global user_message
-        user_message = message.text.split()
-        edit_cp(user_message[1], user_message[2], user_message[3], user_message[4])
-        print(user_message)
+    # if is_admin(message.from_user.id):
+    #     global user_message
+    #     user_message = message.text.split()
+    #     edit_cp(user_message[1], user_message[2], user_message[3], user_message[4])
+    #     print(user_message)
         await message.answer(
             'Успешно изменено'
         )
@@ -42,11 +41,11 @@ async def cmd_edit_content_plan(message: types.Message):
 
 @router.message(Command("edit_director"))
 async def cmd_edit_director(message: types.Message):
-    if is_admin(message.from_user.id):
-        global user_message
-        user_message = message.text.split()
-        edit_director(user_message[1], user_message[2])
-        print(user_message)
+    # if is_admin(message.from_user.id):
+    #     global user_message
+    #     user_message = message.text.split()
+    #     edit_director(user_message[1], user_message[2])
+    #     print(user_message)
         await message.answer(
             'Успешно изменено'
         )

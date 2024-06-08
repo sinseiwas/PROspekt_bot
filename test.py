@@ -6,7 +6,6 @@ from answers import *
 import mock
 from unittest.mock import AsyncMock
 from answers import cmd_edit_trennings
-from unittest.mock import AsyncMock
 import asyncio
 from answers import cmd_edit_trennings
  
@@ -79,11 +78,11 @@ class TestDBOperations(unittest.TestCase):
         self.db.commit()
 
 
-    async def test_edit_trennings(self):
-            message = AsyncMock()
-            await cmd_edit_trennings(message)
+    # async def test_edit_trennings(self):
+    #         message = AsyncMock()
+    #         await cmd_edit_trennings(message)
 
-            message.answer.assert_called_with('Успешно изменено')
+    #         message.answer.assert_called_with('Успешно изменено')
 
     def test_edit_trennings(self):
         self.cur.execute("INSERT INTO trennings VALUES('1.05.2024', 'Вербатим', '258')")
@@ -176,6 +175,30 @@ class TestDBOperations(unittest.TestCase):
             ('июнь', '29', 'Представление1', 'Место1'),
             ('июль', '15', 'Представление2', 'Место2')
         ])
+
+
+
+class TestMocking(unittest.IsolatedAsyncioTestCase):
+    async def test_edit_trennings(self):
+        message = AsyncMock()
+        await cmd_edit_trennings(message)
+
+        message.answer.assert_called_with('Успешно изменено')
+
+    
+    async def test_edit_cp(self):
+        message = AsyncMock()
+        await cmd_edit_content_plan(message)
+
+        message.answer.assert_called_with('Успешно изменено')
+
+
+    async def test_edit_cp(self):
+        message = AsyncMock()
+        await cmd_edit_director(message)
+
+        message.answer.assert_called_with('Успешно изменено')
+
 
 if __name__ == '__main__':
     unittest.main()
