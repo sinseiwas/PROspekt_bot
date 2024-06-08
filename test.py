@@ -256,15 +256,13 @@ class TestMocking(unittest.IsolatedAsyncioTestCase):
 
     async def test_performances(self):
         message = AsyncMock()
-
+        
         await cmd_performances(message)
 
-        performances = [
-            ['param1', 'param2', 'param3', 'param4'],
-        ]
+        performances = return_performances()
 
         for i in range(len(performances)):
-            message.answer.assert_called_with(f'месяц: {performances[i][0]}\nдата: {performances[i][1]}\nназвание: {performances[i][2]}\nместо проведения: {performances[i][3]}')
+            message.answer.assert_any_call(f'месяц: {performances[i][0]}\nдата: {performances[i][1]}\nназвание: {performances[i][2]}\nместо проведения: {performances[i][3]}')
 
 
     async def test_date_of_post(self):
