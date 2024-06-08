@@ -3,7 +3,6 @@ import sqlite3 as sq
 from os import path
 import os
 from answers import *
-import mock
 from unittest.mock import AsyncMock
 from answers import cmd_edit_trennings
 import asyncio
