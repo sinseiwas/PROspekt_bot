@@ -1,5 +1,5 @@
 [![CI/CD GitHub Actions](https://github.com/sinseiwas/PROspekt_bot/actions/workflows/main.yml/badge.svg)](https://github.com/sinseiwas/PROspekt_bot/actions/workflows/test-action.yml)
-[![Coverage Status](https://coveralls.io/repos/sinseiwas/PROspekt_bot/badge.svg?branch=main)](https://coveralls.io/github/sinseiwas/PROspekt_bot?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/sinseiwas/PROspekt_bot/badge.svg?branch=main)](https://coveralls.io/github/sinseiwas/PROspekt_bot?branch=main)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=sinseiwas_PROspekt_bot&metric=bugs)](https://sonarcloud.io/summary/new_code?id=sinseiwas_PROspekt_bot)
 [![Code smells](https://sonarcloud.io/api/project_badges/measure?project=sinseiwas_PROspekt_bot&metric=code_smells)](https://sonarcloud.io/dashboard?id=sinseiwas_PROspekt_bot)
 
