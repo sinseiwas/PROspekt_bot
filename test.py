@@ -1,14 +1,11 @@
 import unittest
 import sqlite3 as sq
-from os import path
 import os
-from answers import *
+from os import path
 import asyncio
 from unittest.mock import AsyncMock, patch, MagicMock
 from aiogram import types
 from aiogram.types import Message, CallbackQuery
-import tracemalloc
-tracemalloc.start()
 
 
 # Импортируем тестируемые функции
@@ -16,6 +13,9 @@ from database_prospekt import (
     edit_trennings, edit_performance, insert_performance, edit_cp, edit_director,
     return_directors, return_content_plan, return_trennings_plan, return_performances, get_script_dir
 )
+from answers import *
+from start import *
+
 
 class TestDBOperations(unittest.TestCase):
 
@@ -307,6 +307,35 @@ class TestMocking(unittest.IsolatedAsyncioTestCase):
         i = 1
 
         callback.message.answer.assert_called_with(dir[i - 1][1])
+
+    
+    async def test_start_is_admin(self):
+        message = AsyncMock()
+        message.from_user.id = 890684152
+        message.from_user.full_name = "Test User"
+
+        await cmd_start(message)
+
+        builder = get_admin_kb()
+        message.answer.assert_any_call(f"Для изменения треннингов введите: /edit_trennings [место, где будет проходить треннинг] [что это будет за треннинг] [дата, когда вы хотите провести треннинг]\nконтент плана: /edit_cp [название поста] [имя того, кто пишет текст] [имя того, кто делает картинку] [дата выхода поста]\nпостановок: /edit_performance\n должностных лиц: /edit_directors [имя, на которое будете менять] [id имени, которое будете менять 1	Ярослав Корнеенко 2 Дарья Гостева 3	Алиса Паландер 4 Данил Суханов 5 Иван Зазулин 6 Ася Панина 7 Пока что нет]\nДаты писать в формате ДД.ММ.ГГГГ",
+            reply_markup=builder.as_markup(resize_keyboard=True),
+            parse_mode=ParseMode.HTML)
+
+        message.answer.assert_any_call(f" Театр ПРОспект приветствует тебя, <u>{message.from_user.full_name}</u>!\n",
+        parse_mode=ParseMode.HTML
+        )
+
+        builder = InlineKeyboardBuilder()
+        builder.row(types.InlineKeyboardButton(
+            text="ПРОспект", url="https://vk.com/teatr_prospekt")
+        )
+
+        message.answer.assert_any_call(
+            "Официальная группа вконтакте",
+            reply_markup=builder.as_markup()
+        )
+
+
 
 if __name__ == '__main__':
     unittest.main()
