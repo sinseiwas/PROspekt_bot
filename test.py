@@ -4,7 +4,7 @@ import os
 from os import path
 import asyncio
 from unittest.mock import AsyncMock, patch, MagicMock
-from aiogram import types
+from aiogram import types, F
 from aiogram.types import Message, CallbackQuery
 
 
@@ -15,6 +15,7 @@ from database_prospekt import (
 )
 from answers import *
 from start import *
+from keyboards.keyboards import *
 
 
 class TestDBOperations(unittest.TestCase):
@@ -357,6 +358,35 @@ class TestMocking(unittest.IsolatedAsyncioTestCase):
             "Официальная группа вконтакте",
             reply_markup=builder.as_markup()
         )
+
+
+class TestKeyboards(unittest.TestCase):
+    def test_get_org_keyboard(self):
+        keyboard = get_org_keyboard()
+        # Assert that keyboard is of type ReplyKeyboardMarkup
+        self.assertIsInstance(keyboard, types.InlineKeyboardMarkup)
+        # Add more assertions as needed
+    
+    def test_get_cp_kb(self):
+        keyboard = get_cp_kb()
+        # Add assertions for the returned keyboard
+    
+    def test_get_trenning_kb(self):
+        keyboard = get_trenning_kb()
+        # Add assertions for the returned keyboard
+    
+    def test_get_admin_trenning_kb(self):
+        keyboard = get_admin_trenning_kb()
+        # Add assertions for the returned keyboard
+    
+    
+    def test_get_start_kb(self):
+        keyboard = get_start_kb()
+        # Add assertions for the returned keyboard
+    
+    def test_get_admin_kb(self):
+        keyboard = get_admin_kb()
+        # Add assertions for the returned keyboard
 
 
 if __name__ == '__main__':

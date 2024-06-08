@@ -69,14 +69,6 @@ def get_admin_trenning_kb():
     return keyboard
 
 
-def get_name_cp_kb():
-    buttons = []
-    for i in text.names:
-        types.InlineKeyboardButton(text=f"{i}", callback_data=f"{i}")
-    keyboard = types.InlineKeyboardMarkup(inline_keyboard=buttons)
-    return keyboard
-
-
 def get_start_kb():
     builder = ReplyKeyboardBuilder()
     builder.add(types.KeyboardButton(text="directors"))
