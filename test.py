@@ -336,6 +336,28 @@ class TestMocking(unittest.IsolatedAsyncioTestCase):
         )
 
 
+    async def test_start_is_not_admin(self):
+        message = AsyncMock()
+        message.from_user.id = 12345
+
+        await cmd_start(message)
+
+        builder = get_start_kb()
+
+        message.answer.assert_any_call(f" Театр ПРОспект приветствует тебя, <u>{message.from_user.full_name}</u>!\n",
+        parse_mode=ParseMode.HTML
+        )
+
+        builder = InlineKeyboardBuilder()
+        builder.row(types.InlineKeyboardButton(
+            text="ПРОспект", url="https://vk.com/teatr_prospekt")
+        )
+
+        message.answer.assert_any_call(
+            "Официальная группа вконтакте",
+            reply_markup=builder.as_markup()
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
